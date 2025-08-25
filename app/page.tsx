@@ -209,7 +209,7 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl">
           <FadeIn>
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">Why Choose StartupIdeas?</h2>
+              <h2 className="text-3xl font-bold mb-4">Why Choose IdeaBench?</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Every idea comes with detailed analysis to help you make informed decisions about your next venture.
               </p>

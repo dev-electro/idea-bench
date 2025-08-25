@@ -18,7 +18,7 @@ export default function PaymentSuccessPage() {
             </div>
             <h1 className="text-3xl font-bold mb-2">Payment Successful!</h1>
             <p className="text-muted-foreground text-lg">
-              Welcome to StartupIdeas! Your lifetime access has been activated.
+              Welcome to IdeaBench! Your lifetime access has been activated.
             </p>
           </div>
 

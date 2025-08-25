@@ -11,10 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "StartupIdeas - 1000+ Validated Business Ideas",
+  title: "IdeaBench - 1000+ Validated Business Ideas",
   description:
     "Discover profitable startup ideas with detailed analysis on monetization, competition, and ease of build.",
-  generator: "v0.app",
 }
 
 export default function RootLayout({

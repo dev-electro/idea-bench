@@ -198,7 +198,7 @@ export default function PaymentPage() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold">StartupIdeas Lifetime Access</h3>
+                      <h3 className="font-semibold">IdeaBench Lifetime Access</h3>
                       <p className="text-sm text-muted-foreground">1,000+ validated startup ideas</p>
                     </div>
                     <Badge variant="secondary" className="bg-primary/10 text-primary">

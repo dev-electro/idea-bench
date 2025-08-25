@@ -1680,16 +1680,6 @@ export const startupIdeas = [
         "category": "consumer"
     },
     {
-        "idea": "Custom AI agent platform",
-        "monetisation": 5,
-        "monetisation_reason": "Businesses and creators pay well for custom AI agents for FAQs, lead capture, and automation.",
-        "ease_of_build": 3,
-        "ease_of_build_reason": "Requires AI integration and agent deployment pipelines; moderate complexity.",
-        "competition": 3,
-        "competition_reason": "Some low-code AI agent platforms exist, but market is growing quickly.",
-        "category": "AI SaaS"
-    },
-    {
         "idea": "Snippet organisation platform",
         "monetisation": 3,
         "monetisation_reason": "Developers may pay for premium features like private storage or team collaboration, but free alternatives exist.",

@@ -33,7 +33,8 @@ export default function ExplorePage() {
   useEffect(() => {
     const checkAuth = () => {
       const authStatus = localStorage.getItem("isAuthenticated")
-      setIsAuthenticated(authStatus === "true")
+      // setIsAuthenticated(authStatus === "true")
+      setIsAuthenticated( true)
     }
 
     checkAuth()

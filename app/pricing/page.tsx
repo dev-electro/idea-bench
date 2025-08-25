@@ -1,3 +1,5 @@
+'use client'
+
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -100,12 +102,22 @@ export default function PricingPage() {
                     <span>No recurring fees</span>
                   </li>
                 </ul>
-                <Link href="/payment" className="block">
-                  <Button size="lg" className="w-full mt-6 text-lg py-6">
-                    <Zap className="w-5 h-5 mr-2" />
-                    Get Lifetime Access - £10
-                  </Button>
-                </Link>
+                <Button
+                    size="lg" className="w-full mt-6 text-lg py-6"
+                    onClick={async () => {
+                      const res = await fetch("/api/create-checkout-session", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                      })
+                      const data = await res.json()
+                      if (data.url) {
+                        window.location.href = data.url
+                      }
+                    }}
+                >
+                  <Zap className="w-5 h-5 mr-2" />
+                  Get Lifetime Access - £10
+                </Button>
                 <p className="text-xs text-muted-foreground text-center">
                   Secure payment via Stripe
                 </p>

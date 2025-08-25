@@ -58,9 +58,6 @@ export default function PaymentSuccessPage() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              A confirmation email has been sent to your inbox with your receipt and access details.
-            </p>
           </div>
 
           {/* Next Steps */}

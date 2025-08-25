@@ -12,54 +12,54 @@ import Link from "next/link"
 // Sample data for table preview
 const sampleIdeas = [
   {
-    idea: "AI-Powered Email Assistant",
-    monetisation: 9,
-    monetisation_reason: "High recurring revenue potential with SaaS model",
-    ease_of_build: 6,
-    ease_of_build_reason: "Requires AI integration and email API knowledge",
-    competition: 7,
-    competition_reason: "Growing market with established players",
-    category: "AI/SaaS",
+    "idea": "Call Co-pilot for Sales",
+    "monetisation": 5,
+    "monetisation_reason": "Sales teams have high budgets and pay for tools that increase revenue.",
+    "ease_of_build": 2,
+    "ease_of_build_reason": "AI-driven call assistance requires complex ML models and integrations.",
+    "competition": 3,
+    "competition_reason": "There are existing AI sales tools, but room for differentiation exists.",
+    "category": "SaaS"
   },
   {
-    idea: "Local Service Marketplace",
-    monetisation: 8,
-    monetisation_reason: "Commission-based model with network effects",
-    ease_of_build: 7,
-    ease_of_build_reason: "Standard marketplace features, payment integration",
-    competition: 8,
-    competition_reason: "Highly competitive space with big players",
-    category: "Marketplace",
+    "idea": "Email Deliverability Testing",
+    "monetisation": 4,
+    "monetisation_reason": "Businesses depend on email marketing performance and will pay monthly.",
+    "ease_of_build": 3,
+    "ease_of_build_reason": "Requires email infrastructure knowledge but is manageable.",
+    "competition": 3,
+    "competition_reason": "Several competitors exist, though niche for SMB-focused solutions.",
+    "category": "SaaS"
   },
   {
-    idea: "Micro-Learning Platform",
-    monetisation: 7,
-    monetisation_reason: "Subscription model with course sales potential",
-    ease_of_build: 8,
-    ease_of_build_reason: "Content management and video streaming required",
-    competition: 6,
-    competition_reason: "Niche market with room for specialization",
-    category: "EdTech",
+    "idea": "Website Feedback Widget",
+    "monetisation": 4,
+    "monetisation_reason": "Businesses need user feedback constantly, reasonable subscription.",
+    "ease_of_build": 5,
+    "ease_of_build_reason": "A simple JS snippet with backend is very straightforward to implement.",
+    "competition": 2,
+    "competition_reason": "Several established players like Hotjar, though space exists for niche angles.",
+    "category": "SaaS"
   },
   {
-    idea: "Smart Home Dashboard",
-    monetisation: 6,
-    monetisation_reason: "Hardware dependency limits scalability",
-    ease_of_build: 5,
-    ease_of_build_reason: "IoT integration and device compatibility complex",
-    competition: 7,
-    competition_reason: "Established tech giants dominate",
-    category: "IoT",
+    "idea": "Conversational Data Analytics",
+    "monetisation": 5,
+    "monetisation_reason": "High-end BI replacements are expensive, making subscription high-value.",
+    "ease_of_build": 2,
+    "ease_of_build_reason": "Requires advanced analytics and AI capabilities, technically complex.",
+    "competition": 2,
+    "competition_reason": "BI market is competitive, though conversational AI angle is emerging.",
+    "category": "SaaS"
   },
   {
-    idea: "Freelancer Time Tracker",
-    monetisation: 8,
-    monetisation_reason: "Clear value proposition, recurring revenue",
-    ease_of_build: 9,
-    ease_of_build_reason: "Straightforward CRUD app with time tracking",
-    competition: 9,
-    competition_reason: "Saturated market with many solutions",
-    category: "Productivity",
+    "idea": "Reddit Marketing Tool",
+    "monetisation": 4,
+    "monetisation_reason": "Marketers pay for tools that give them competitive edge on high-engagement platforms.",
+    "ease_of_build": 3,
+    "ease_of_build_reason": "APIs exist but require careful handling of Reddit’s rate limits and rules.",
+    "competition": 3,
+    "competition_reason": "Some niche tools exist, but not saturated.",
+    "category": "SaaS"
   },
 ]
 
@@ -79,7 +79,7 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-              Access 1,000+ validated startup ideas with detailed analysis on monetization potential, competition
+              Access 200+ validated startup ideas with detailed analysis on monetization potential, competition
               levels, and ease of build. Stop brainstorming, start building.
             </p>
           </FadeIn>
@@ -111,7 +111,7 @@ export default function HomePage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Get a Taste of What's Inside</h2>
               <p className="text-muted-foreground text-lg">
-                Here's a preview of 5 startup ideas. Unlock all 1,000+ with lifetime access.
+                Here's a preview of 5 startup ideas. Unlock all 200+ with lifetime access.
               </p>
             </div>
           </FadeIn>
@@ -183,7 +183,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <AnimatedCard className="p-6 text-center shadow-lg">
                       <CardHeader>
-                        <CardTitle>Unlock 995+ More Ideas</CardTitle>
+                        <CardTitle>Unlock 195+ More Ideas</CardTitle>
                         <CardDescription>
                           Get lifetime access to our complete database of validated startup ideas
                         </CardDescription>
@@ -322,7 +322,7 @@ export default function HomePage() {
           <FadeIn>
             <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
             <p className="text-muted-foreground text-lg mb-12">
-              Get lifetime access to all 1,000+ startup ideas for a one-time payment.
+              Get lifetime access to all 200+ startup ideas for a one-time payment.
             </p>
           </FadeIn>
 
@@ -347,7 +347,7 @@ export default function HomePage() {
                 <ul className="space-y-3 text-left">
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>1,000+ validated startup ideas</span>
+                    <span>200+ validated startup ideas</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />

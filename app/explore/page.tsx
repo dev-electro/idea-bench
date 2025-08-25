@@ -15,164 +15,7 @@ import { ChevronUp, ChevronDown, Search, Filter, Lock } from "lucide-react"
 import { FadeIn } from "@/components/fade-in"
 import { AnimatedCard } from "@/components/animated-card"
 import Link from "next/link"
-
-// Extended dataset of startup ideas
-const startupIdeas = [
-  {
-    idea: "AI-Powered Email Assistant",
-    monetisation: 9,
-    monetisation_reason:
-      "High recurring revenue potential with SaaS model, enterprise clients willing to pay premium for productivity gains",
-    ease_of_build: 6,
-    ease_of_build_reason: "Requires AI integration, email API knowledge, and sophisticated NLP processing",
-    competition: 7,
-    competition_reason:
-      "Growing market with established players like Grammarly and Jasper, but room for specialization",
-    category: "AI/SaaS",
-  },
-  {
-    idea: "Local Service Marketplace",
-    monetisation: 8,
-    monetisation_reason: "Commission-based model with strong network effects, multiple revenue streams from both sides",
-    ease_of_build: 7,
-    ease_of_build_reason:
-      "Standard marketplace features, payment integration, geolocation, and review systems required",
-    competition: 8,
-    competition_reason: "Highly competitive space dominated by TaskRabbit, Thumbtack, and local players",
-    category: "Marketplace",
-  },
-  {
-    idea: "Micro-Learning Platform",
-    monetisation: 7,
-    monetisation_reason: "Subscription model with course sales, corporate training contracts provide steady revenue",
-    ease_of_build: 8,
-    ease_of_build_reason: "Content management system, video streaming, progress tracking, and mobile app needed",
-    competition: 6,
-    competition_reason: "Niche market with room for specialization, less saturated than general education platforms",
-    category: "EdTech",
-  },
-  {
-    idea: "Smart Home Dashboard",
-    monetisation: 6,
-    monetisation_reason:
-      "Hardware dependency limits scalability, but premium pricing possible for integrated solutions",
-    ease_of_build: 5,
-    ease_of_build_reason: "Complex IoT integration, device compatibility, real-time data processing challenges",
-    competition: 7,
-    competition_reason: "Established tech giants like Google, Amazon dominate, but niche opportunities exist",
-    category: "IoT",
-  },
-  {
-    idea: "Freelancer Time Tracker",
-    monetisation: 8,
-    monetisation_reason: "Clear value proposition with recurring revenue, easy to scale across different professions",
-    ease_of_build: 9,
-    ease_of_build_reason: "Straightforward CRUD application with time tracking, reporting, and basic integrations",
-    competition: 9,
-    competition_reason: "Extremely saturated market with Toggl, RescueTime, and dozens of alternatives",
-    category: "Productivity",
-  },
-  {
-    idea: "Sustainable Fashion Rental",
-    monetisation: 7,
-    monetisation_reason: "Subscription and rental fees, growing market awareness of sustainability",
-    ease_of_build: 6,
-    ease_of_build_reason: "Inventory management, logistics, cleaning processes, and mobile app required",
-    competition: 5,
-    competition_reason: "Emerging market with few established players, opportunity for differentiation",
-    category: "Fashion",
-  },
-  {
-    idea: "Mental Health Chatbot",
-    monetisation: 8,
-    monetisation_reason: "B2B sales to healthcare providers, insurance partnerships, premium individual subscriptions",
-    ease_of_build: 4,
-    ease_of_build_reason: "Complex AI/ML requirements, regulatory compliance, clinical validation needed",
-    competition: 6,
-    competition_reason: "Growing market with some players like Woebot, but still room for innovation",
-    category: "HealthTech",
-  },
-  {
-    idea: "Carbon Footprint Tracker",
-    monetisation: 6,
-    monetisation_reason: "Freemium model with premium analytics, corporate ESG reporting services",
-    ease_of_build: 7,
-    ease_of_build_reason: "Data integration from multiple sources, complex calculations, user-friendly interface",
-    competition: 5,
-    competition_reason: "Emerging market with growing demand but limited established solutions",
-    category: "GreenTech",
-  },
-  {
-    idea: "Virtual Interior Designer",
-    monetisation: 8,
-    monetisation_reason: "High-value transactions, commission from furniture sales, premium consultation fees",
-    ease_of_build: 5,
-    ease_of_build_reason: "AR/VR technology, 3D modeling, extensive product catalog integration required",
-    competition: 6,
-    competition_reason: "Some players exist but market still developing, opportunity for better UX",
-    category: "PropTech",
-  },
-  {
-    idea: "Podcast Analytics Platform",
-    monetisation: 7,
-    monetisation_reason: "SaaS model targeting podcasters and agencies, growing creator economy",
-    ease_of_build: 6,
-    ease_of_build_reason: "Data aggregation from multiple platforms, analytics dashboard, API integrations",
-    competition: 7,
-    competition_reason: "Established players like Chartable, but room for specialized features",
-    category: "Media/Analytics",
-  },
-  {
-    idea: "Pet Care Scheduling App",
-    monetisation: 7,
-    monetisation_reason: "Subscription model, commission from service providers, premium features for pet owners",
-    ease_of_build: 8,
-    ease_of_build_reason: "Standard booking system with notifications, payment processing, user profiles",
-    competition: 6,
-    competition_reason: "Some regional players but no dominant global solution, pet industry growing",
-    category: "Lifestyle",
-  },
-  {
-    idea: "Blockchain Supply Chain Tracker",
-    monetisation: 6,
-    monetisation_reason: "Enterprise contracts, but market still developing and adoption uncertain",
-    ease_of_build: 3,
-    ease_of_build_reason: "Complex blockchain integration, enterprise-grade security, industry-specific requirements",
-    competition: 4,
-    competition_reason: "Early market with few established players, high barriers to entry",
-    category: "Blockchain",
-  },
-  {
-    idea: "Language Exchange Platform",
-    monetisation: 6,
-    monetisation_reason: "Freemium model with premium matching, tutoring marketplace commission",
-    ease_of_build: 7,
-    ease_of_build_reason: "Video calling integration, matching algorithms, community features needed",
-    competition: 8,
-    competition_reason: "Competitive market with HelloTalk, Tandem, and language learning apps",
-    category: "EdTech",
-  },
-  {
-    idea: "Elderly Care Coordination",
-    monetisation: 9,
-    monetisation_reason: "High-value market, insurance partnerships, family willingness to pay for peace of mind",
-    ease_of_build: 6,
-    ease_of_build_reason: "Healthcare integrations, emergency systems, family communication features",
-    competition: 5,
-    competition_reason: "Underserved market with aging population, few comprehensive solutions",
-    category: "HealthTech",
-  },
-  {
-    idea: "Influencer Campaign Manager",
-    monetisation: 8,
-    monetisation_reason: "Commission-based model, growing influencer marketing industry",
-    ease_of_build: 7,
-    ease_of_build_reason: "Social media API integrations, campaign tracking, payment systems",
-    competition: 7,
-    competition_reason: "Several players exist but market still growing rapidly",
-    category: "Marketing",
-  },
-]
+import {startupIdeas} from "@/lib/lists";
 
 type SortField = "idea" | "monetisation" | "ease_of_build" | "competition" | "category"
 type SortDirection = "asc" | "desc"
@@ -180,9 +23,9 @@ type SortDirection = "asc" | "desc"
 export default function ExplorePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
-  const [monetisationRange, setMonetisationRange] = useState([1, 10])
-  const [easeOfBuildRange, setEaseOfBuildRange] = useState([1, 10])
-  const [competitionRange, setCompetitionRange] = useState([1, 10])
+  const [monetisationRange, setMonetisationRange] = useState([1, 5])
+  const [easeOfBuildRange, setEaseOfBuildRange] = useState([1, 5])
+  const [competitionRange, setCompetitionRange] = useState([1, 5])
   const [sortField, setSortField] = useState<SortField>("monetisation")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -319,7 +162,7 @@ export default function ExplorePage() {
                     <Slider
                       value={monetisationRange}
                       onValueChange={setMonetisationRange}
-                      max={10}
+                      max={5}
                       min={1}
                       step={1}
                       className="w-full"
@@ -334,7 +177,7 @@ export default function ExplorePage() {
                     <Slider
                       value={easeOfBuildRange}
                       onValueChange={setEaseOfBuildRange}
-                      max={10}
+                      max={5}
                       min={1}
                       step={1}
                       className="w-full"
@@ -349,7 +192,7 @@ export default function ExplorePage() {
                     <Slider
                       value={competitionRange}
                       onValueChange={setCompetitionRange}
-                      max={10}
+                      max={5}
                       min={1}
                       step={1}
                       className="w-full"

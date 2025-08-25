@@ -199,7 +199,7 @@ export default function PaymentPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-semibold">IdeaBench Lifetime Access</h3>
-                      <p className="text-sm text-muted-foreground">1,000+ validated startup ideas</p>
+                      <p className="text-sm text-muted-foreground">200+ validated startup ideas</p>
                     </div>
                     <Badge variant="secondary" className="bg-primary/10 text-primary">
                       50% OFF
@@ -237,7 +237,7 @@ export default function PaymentPage() {
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3">
                       <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-sm">1,000+ validated startup ideas</span>
+                      <span className="text-sm">200+ validated startup ideas</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <Check className="w-5 h-5 text-primary flex-shrink-0" />

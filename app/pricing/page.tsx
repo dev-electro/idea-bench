@@ -14,12 +14,12 @@ export default function PricingPage() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Get lifetime access to all 1,000+ startup ideas for a one-time payment. No subscriptions, no hidden fees.
+            Get lifetime access to all 200+ startup ideas for a one-time payment. No subscriptions, no hidden fees.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Free Preview */}
             <Card className="relative">
               <CardHeader className="text-center pb-8">
@@ -73,7 +73,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>1,000+ validated startup ideas</span>
+                    <span>200+ validated startup ideas</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
@@ -107,46 +107,8 @@ export default function PricingPage() {
                   </Button>
                 </Link>
                 <p className="text-xs text-muted-foreground text-center">
-                  Secure payment via Stripe • 30-day money-back guarantee
+                  Secure payment via Stripe
                 </p>
-              </CardContent>
-            </Card>
-
-            {/* Enterprise */}
-            <Card className="relative">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl">Enterprise</CardTitle>
-                <CardDescription>For teams and organizations</CardDescription>
-                <div className="text-4xl font-bold mt-4">Custom</div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Everything in Lifetime</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Team collaboration tools</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Custom idea research</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>Priority support</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span>API access</span>
-                  </li>
-                </ul>
-                <Link href="/contact" className="block">
-                  <Button variant="outline" className="w-full mt-6 bg-transparent">
-                    Contact Sales
-                  </Button>
-                </Link>
               </CardContent>
             </Card>
           </div>
@@ -159,7 +121,7 @@ export default function PricingPage() {
             <div>
               <h3 className="text-lg font-semibold mb-2">What exactly do I get with lifetime access?</h3>
               <p className="text-muted-foreground">
-                You get access to our complete database of 1,000+ startup ideas, each with detailed analysis including
+                You get access to our complete database of 200+ startup ideas, each with detailed analysis including
                 monetization potential, ease of build, competition level, and reasoning behind each score. Plus all
                 future updates and new ideas added to the database.
               </p>
@@ -167,16 +129,9 @@ export default function PricingPage() {
             <div>
               <h3 className="text-lg font-semibold mb-2">How are the ideas validated?</h3>
               <p className="text-muted-foreground">
-                Each idea is researched and analyzed by our team of entrepreneurs and industry experts. We evaluate
+                Each idea is scraped from Reddit and someone out there is building it. We evaluate
                 market demand, competition, technical feasibility, and revenue potential to provide you with actionable
                 insights.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Is there a money-back guarantee?</h3>
-              <p className="text-muted-foreground">
-                Yes! We offer a 30-day money-back guarantee. If you're not satisfied with the quality and value of our
-                startup ideas database, we'll refund your purchase in full.
               </p>
             </div>
             <div>

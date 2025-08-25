@@ -33,7 +33,7 @@ export default function PaymentSuccessPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>1,000+ startup ideas</span>
+                  <span>200+ startup ideas</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
@@ -78,7 +78,7 @@ export default function PaymentSuccessPage() {
                   <div>
                     <h3 className="font-semibold">Explore the Database</h3>
                     <p className="text-sm text-muted-foreground">
-                      Browse through 1,000+ ideas using our advanced filtering and sorting tools.
+                      Browse through 200+ ideas using our advanced filtering and sorting tools.
                     </p>
                   </div>
                 </div>

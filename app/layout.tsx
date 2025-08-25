@@ -11,7 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "IdeaBench - 1000+ Validated Business Ideas",
+  title: "IdeaBench - 200+ Validated Business Ideas",
   description:
     "Discover profitable startup ideas with detailed analysis on monetization, competition, and ease of build.",
 }

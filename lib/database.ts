@@ -13,3 +13,9 @@ export async function add_purchase(email: string) {
 
     return true;
 }
+
+export async function get_user(email: string) {
+    await dbConnect();
+    const user = await User.find({ email });
+    return user.length === 0 ? false : user[0];
+}

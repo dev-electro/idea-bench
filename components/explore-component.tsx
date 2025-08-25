@@ -39,8 +39,10 @@ export default function ExploreComponent(props: ExplorePageProps) {
 
     // Get unique categories
     const categories = useMemo(() => {
-        const cats = Array.from(new Set(startupIdeas.map((idea) => idea.category)))
-        return cats.sort()
+        const cats = startupIdeas.flatMap((idea) =>
+            idea.category.split(", ").map((c) => c.trim())
+        )
+        return Array.from(new Set(cats)).sort()
     }, [])
 
     // Filter and sort ideas
@@ -48,8 +50,13 @@ export default function ExploreComponent(props: ExplorePageProps) {
         const filtered = startupIdeas.filter((idea) => {
             const matchesSearch =
                 idea.idea.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                idea.category.toLowerCase().includes(searchTerm.toLowerCase())
-            const matchesCategory = selectedCategory === "all" || idea.category === selectedCategory
+                idea.category
+                    .split(", ")
+                    .map((c) => c.toLowerCase())
+                    .some((c) => c.includes(searchTerm.toLowerCase()))
+            const matchesCategory =
+                selectedCategory === "all" ||
+                idea.category.split(", ").map((c) => c.trim()).includes(selectedCategory)
             const matchesMonetisation = idea.monetisation >= monetisationRange[0] && idea.monetisation <= monetisationRange[1]
             const matchesEaseOfBuild = idea.ease_of_build >= easeOfBuildRange[0] && idea.ease_of_build <= easeOfBuildRange[1]
             const matchesCompetition = idea.competition >= competitionRange[0] && idea.competition <= competitionRange[1]
@@ -311,11 +318,20 @@ export default function ExploreComponent(props: ExplorePageProps) {
                                                         </TooltipContent>
                                                     </Tooltip>
                                                 </td>
-                                                <td className="p-4">
-                                                    <Badge variant="secondary" className="transition-colors duration-200 hover:bg-secondary/80">
-                                                        {idea.category}
-                                                    </Badge>
+
+                                                <td className="p-4 flex flex-wrap gap-2">
+                                                    {idea.category.split(", ").map((cat, idx) => (
+                                                        <Badge
+                                                            key={idx}
+                                                            variant="secondary"
+                                                            className="transition-colors duration-200 hover:bg-secondary/80"
+                                                        >
+                                                            {cat}
+                                                        </Badge>
+                                                    ))}
                                                 </td>
+
+
                                             </tr>
                                         ))}
                                         </tbody>

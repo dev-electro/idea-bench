@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
+import Script from 'next/script'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,16 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-84MQDR0R69" />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-84MQDR0R69');
+        `}
+        </Script>
       </body>
     </html>
   )

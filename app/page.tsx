@@ -111,9 +111,9 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl">
           <FadeIn>
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Get a Taste of What's Inside</h2>
+              <h2 className="text-3xl font-bold mb-4">Get a Taste of What&apos;s Inside</h2>
               <p className="text-muted-foreground text-lg">
-                Here's a preview of 5 startup ideas. Unlock all 200+ with lifetime access.
+                Here&apos;s a preview of 5 startup ideas. Unlock all 200+ with lifetime access.
               </p>
             </div>
           </FadeIn>

@@ -63,8 +63,8 @@ export default function PaymentSuccessPage() {
           {/* Next Steps */}
           <Card className="mt-12 text-left">
             <CardHeader>
-              <CardTitle>What's Next?</CardTitle>
-              <CardDescription>Here's how to make the most of your new access</CardDescription>
+              <CardTitle>What&apos;s Next?</CardTitle>
+              <CardDescription>Here&apos;s how to make the most of your new access</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">

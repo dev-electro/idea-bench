@@ -26,7 +26,7 @@ export default function PricingPage() {
             <Card className="relative">
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl">Free Preview</CardTitle>
-                <CardDescription>Get a taste of what's inside</CardDescription>
+                <CardDescription>Get a taste of what&apos;s inside</CardDescription>
                 <div className="text-4xl font-bold mt-4">£0</div>
               </CardHeader>
               <CardContent className="space-y-4">

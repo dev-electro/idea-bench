@@ -15,17 +15,35 @@ import { ChevronUp, ChevronDown, Search, Filter, Lock } from "lucide-react"
 import { FadeIn } from "@/components/fade-in"
 import { AnimatedCard } from "@/components/animated-card"
 import Link from "next/link"
-import {startupIdeas} from "@/lib/lists";
 
 type SortField = "idea" | "monetisation" | "ease_of_build" | "competition" | "category"
 type SortDirection = "asc" | "desc"
 
+interface StartupIdea {
+    idea: string;
+    monetisation: number;
+    monetisation_reason: string;
+    ease_of_build: number;
+    ease_of_build_reason: string;
+    competition: number;
+    competition_reason: string;
+    category: string;
+    categories: string[];
+}
+
 type ExplorePageProps = {
     authenticated: boolean;
     hasAccess: boolean;
+    ideas: StartupIdea[];
+    totalCount: number;
 };
 
-export default function ExploreComponent(props: ExplorePageProps) {
+export default function ExploreComponent({
+                                             authenticated,
+                                             hasAccess,
+                                             ideas,
+                                             totalCount,
+                                         }: ExplorePageProps) {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState<string>("all")
     const [monetisationRange, setMonetisationRange] = useState([1, 5])
@@ -33,20 +51,19 @@ export default function ExploreComponent(props: ExplorePageProps) {
     const [competitionRange, setCompetitionRange] = useState([1, 5])
     const [sortField, setSortField] = useState<SortField>("monetisation")
     const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
-    const [isAuthenticated, setIsAuthenticated] = useState(props.authenticated)
-    const [hasFullAccess, setHasFullAccess] = useState(props.hasAccess)
-
+    const [isAuthenticated, setIsAuthenticated] = useState(authenticated)
+    const [hasFullAccess, setHasFullAccess] = useState(hasAccess)
 
     // Get unique categories
     const categories = useMemo(() => {
-        const cats = startupIdeas.flatMap((idea) => idea.categories)
+        const cats = ideas.flatMap((idea) => idea.categories)
         return Array.from(new Set(cats)).sort()
     }, [])
 
     // Filter and sort ideas
     // Filter and sort ideas
     const filteredAndSortedIdeas = useMemo(() => {
-        const filtered = startupIdeas.filter((idea) => {
+        const filtered = ideas.filter((idea) => {
             // Search matches either idea text or any category
             const matchesSearch =
                 idea.idea.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -110,8 +127,8 @@ export default function ExploreComponent(props: ExplorePageProps) {
         return sortDirection === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
     }
 
-    const visibleIdeas = hasFullAccess ? filteredAndSortedIdeas : filteredAndSortedIdeas.slice(0, 5)
-    const lockedIdeas = hasFullAccess ? [] : filteredAndSortedIdeas.slice(5)
+    const visibleIdeas = ideas; // already limited by server
+    const lockedCount = hasAccess ? 0 : totalCount - ideas.length;
 
     return (
         <TooltipProvider>
@@ -123,107 +140,112 @@ export default function ExploreComponent(props: ExplorePageProps) {
                         <div className="mb-8">
                             <h1 className="text-3xl font-bold mb-2">Explore Startup Ideas</h1>
                             <p className="text-muted-foreground">
-                                Discover and analyze {startupIdeas.length} validated startup opportunities
+                                Discover and analyze 200+ validated startup opportunities
                             </p>
                         </div>
                     </FadeIn>
 
                     {/* Filters */}
-                    <FadeIn delay={0.2}>
-                        <Card className="mb-8 shadow-sm">
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Filter className="w-5 h-5" />
-                                    Filters & Search
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-6">
-                                {/* Search */}
-                                <div className="relative">
-                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                                    <Input
-                                        placeholder="Search ideas or categories..."
-                                        value={searchTerm}
-                                        onChange={(e) => setSearchTerm(e.target.value)}
-                                        className="pl-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-                                    />
-                                </div>
+                    {hasFullAccess && (
+                        <FadeIn delay={0.2}>
+                            <Card className="mb-8 shadow-sm">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <Filter className="w-5 h-5" />
+                                        Filters & Search
+                                    </CardTitle>
+                                </CardHeader>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    {/* Category Filter */}
-                                    <div className="space-y-2">
-                                        <Label>Category</Label>
-                                        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                                            <SelectTrigger className="transition-all duration-200 hover:border-primary/50">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="all">All Categories</SelectItem>
-                                                {categories.map((category) => (
-                                                    <SelectItem key={category} value={category}>
-                                                        {category}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    {/* Monetisation Range */}
-                                    <div className="space-y-2">
-                                        <Label>
-                                            Monetisation Score: {monetisationRange[0]} - {monetisationRange[1]}
-                                        </Label>
-                                        <Slider
-                                            value={monetisationRange}
-                                            onValueChange={setMonetisationRange}
-                                            max={5}
-                                            min={1}
-                                            step={1}
-                                            className="w-full"
+                                <CardContent className="space-y-6">
+                                    {/* Search */}
+                                    <div className="relative">
+                                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                                        <Input
+                                            placeholder="Search ideas or categories..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            className="pl-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                                         />
                                     </div>
 
-                                    {/* Ease of Build Range */}
-                                    <div className="space-y-2">
-                                        <Label>
-                                            Ease of Build: {easeOfBuildRange[0]} - {easeOfBuildRange[1]}
-                                        </Label>
-                                        <Slider
-                                            value={easeOfBuildRange}
-                                            onValueChange={setEaseOfBuildRange}
-                                            max={5}
-                                            min={1}
-                                            step={1}
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        {/* Category Filter */}
+                                        <div className="space-y-2">
+                                            <Label>Category</Label>
+                                            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                                                <SelectTrigger className="transition-all duration-200 hover:border-primary/50">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="all">All Categories</SelectItem>
+                                                    {categories.map((category) => (
+                                                        <SelectItem key={category} value={category}>
+                                                            {category}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
 
-                                    {/* Competition Range */}
-                                    <div className="space-y-2">
-                                        <Label>
-                                            Competition Level: {competitionRange[0]} - {competitionRange[1]}
-                                        </Label>
-                                        <Slider
-                                            value={competitionRange}
-                                            onValueChange={setCompetitionRange}
-                                            max={5}
-                                            min={1}
-                                            step={1}
-                                            className="w-full"
-                                        />
+                                        {/* Monetisation Range */}
+                                        <div className="space-y-2">
+                                            <Label>
+                                                Monetisation Score: {monetisationRange[0]} - {monetisationRange[1]}
+                                            </Label>
+                                            <Slider
+                                                value={monetisationRange}
+                                                onValueChange={setMonetisationRange}
+                                                max={5}
+                                                min={1}
+                                                step={1}
+                                                className="w-full"
+                                            />
+                                        </div>
+
+                                        {/* Ease of Build Range */}
+                                        <div className="space-y-2">
+                                            <Label>
+                                                Ease of Build: {easeOfBuildRange[0]} - {easeOfBuildRange[1]}
+                                            </Label>
+                                            <Slider
+                                                value={easeOfBuildRange}
+                                                onValueChange={setEaseOfBuildRange}
+                                                max={5}
+                                                min={1}
+                                                step={1}
+                                                className="w-full"
+                                            />
+                                        </div>
+
+                                        {/* Competition Range */}
+                                        <div className="space-y-2">
+                                            <Label>
+                                                Competition Level: {competitionRange[0]} - {competitionRange[1]}
+                                            </Label>
+                                            <Slider
+                                                value={competitionRange}
+                                                onValueChange={setCompetitionRange}
+                                                max={5}
+                                                min={1}
+                                                step={1}
+                                                className="w-full"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </FadeIn>
+                                </CardContent>
+                            </Card>
+                        </FadeIn>
+                    )}
 
                     {/* Results Summary */}
                     <FadeIn delay={0.3}>
                         <div className="mb-6">
                             <p className="text-muted-foreground">
-                                Showing {visibleIdeas.length} of {filteredAndSortedIdeas.length} ideas
-                                {!hasFullAccess && lockedIdeas.length > 0 && (
-                                    <span className="ml-2 text-primary">({lockedIdeas.length} more available with full access)</span>
+                                Showing {visibleIdeas.length} of {totalCount} ideas
+                                {!hasAccess && lockedCount > 0 && (
+                                    <span className="ml-2 text-primary">
+                                        ({lockedCount} more available with full access)
+                                    </span>
                                 )}
                             </p>
                         </div>
@@ -344,14 +366,17 @@ export default function ExploreComponent(props: ExplorePageProps) {
                                 </div>
 
                                 {/* Locked Content Overlay */}
-                                {/* Locked Content Overlay */}
-                                {!hasFullAccess && lockedIdeas.length > 0 && (
+                                {!hasFullAccess && lockedCount > 0 && (
                                     <div className="relative">
                                         <div className="border-t">
-                                            {lockedIdeas.slice(0, 3).map((idea, index) => (
-                                                <div key={`locked-${index}`} className="border-b p-4 blur-sm opacity-50">
+                                            {/* Show 3 fake locked rows */}
+                                            {Array.from({ length: Math.min(3, lockedCount) }).map((_, index) => (
+                                                <div
+                                                    key={`locked-${index}`}
+                                                    className="border-b p-4 blur-sm opacity-50"
+                                                >
                                                     <div className="grid grid-cols-5 gap-4 items-center">
-                                                        <div className="font-medium">{idea.idea}</div>
+                                                        <div className="font-medium">Locked Idea</div>
                                                         <div className="flex items-center gap-2">
                                                             <Lock className="w-4 h-4" />
                                                             <span className="text-sm">Locked</span>
@@ -381,7 +406,7 @@ export default function ExploreComponent(props: ExplorePageProps) {
                                                 <CardHeader>
                                                     <CardTitle className="flex items-center gap-2 justify-center">
                                                         <Lock className="w-5 h-5" />
-                                                        Unlock {lockedIdeas.length} More Ideas
+                                                        Unlock {lockedCount} More Ideas
                                                     </CardTitle>
                                                     <CardDescription>
                                                         Get lifetime access to our complete database with detailed analysis
@@ -392,13 +417,19 @@ export default function ExploreComponent(props: ExplorePageProps) {
                                                     <div className="space-y-2">
                                                         {!isAuthenticated ? (
                                                             <Link href="/login">
-                                                                <Button size="lg" className="w-full transition-all duration-200 hover:scale-105">
+                                                                <Button
+                                                                    size="lg"
+                                                                    className="w-full transition-all duration-200 hover:scale-105"
+                                                                >
                                                                     Sign in to Unlock
                                                                 </Button>
                                                             </Link>
                                                         ) : (
                                                             <Link href="/pricing">
-                                                                <Button size="lg" className="w-full transition-all duration-200 hover:scale-105">
+                                                                <Button
+                                                                    size="lg"
+                                                                    className="w-full transition-all duration-200 hover:scale-105"
+                                                                >
                                                                     Upgrade for Full Access
                                                                 </Button>
                                                             </Link>

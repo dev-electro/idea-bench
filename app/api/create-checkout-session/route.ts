@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
             customer_email: email, // ✅ pre-fills if logged in, shows form otherwise
             line_items: [
                 {
-                    price: "price_1S030tE3YJY8h6JJjigiwWrd",
+                    price: "price_1S0JxDE3YJY8h6JJRWliXbPP",
                     quantity: 1,
                 },
             ],

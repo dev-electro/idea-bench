@@ -127,7 +127,7 @@ export default function ExploreComponent({
         return sortDirection === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
     }
 
-    const visibleIdeas = ideas; // already limited by server
+    const visibleIdeas = filteredAndSortedIdeas;
     const lockedCount = hasAccess ? 0 : totalCount - ideas.length;
 
     return (

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -39,27 +39,30 @@ export default function ExploreComponent(props: ExplorePageProps) {
 
     // Get unique categories
     const categories = useMemo(() => {
-        const cats = startupIdeas.flatMap((idea) =>
-            idea.category.split(", ").map((c) => c.trim())
-        )
+        const cats = startupIdeas.flatMap((idea) => idea.categories)
         return Array.from(new Set(cats)).sort()
     }, [])
 
     // Filter and sort ideas
+    // Filter and sort ideas
     const filteredAndSortedIdeas = useMemo(() => {
         const filtered = startupIdeas.filter((idea) => {
+            // Search matches either idea text or any category
             const matchesSearch =
                 idea.idea.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                idea.category
-                    .split(", ")
-                    .map((c) => c.toLowerCase())
-                    .some((c) => c.includes(searchTerm.toLowerCase()))
+                idea.categories.some((c) => c.toLowerCase().includes(searchTerm.toLowerCase()))
+
+            // Category filter
             const matchesCategory =
-                selectedCategory === "all" ||
-                idea.category.split(", ").map((c) => c.trim()).includes(selectedCategory)
-            const matchesMonetisation = idea.monetisation >= monetisationRange[0] && idea.monetisation <= monetisationRange[1]
-            const matchesEaseOfBuild = idea.ease_of_build >= easeOfBuildRange[0] && idea.ease_of_build <= easeOfBuildRange[1]
-            const matchesCompetition = idea.competition >= competitionRange[0] && idea.competition <= competitionRange[1]
+                selectedCategory === "all" || idea.categories.includes(selectedCategory)
+
+            // Numeric filters
+            const matchesMonetisation =
+                idea.monetisation >= monetisationRange[0] && idea.monetisation <= monetisationRange[1]
+            const matchesEaseOfBuild =
+                idea.ease_of_build >= easeOfBuildRange[0] && idea.ease_of_build <= easeOfBuildRange[1]
+            const matchesCompetition =
+                idea.competition >= competitionRange[0] && idea.competition <= competitionRange[1]
 
             return matchesSearch && matchesCategory && matchesMonetisation && matchesEaseOfBuild && matchesCompetition
         })
@@ -82,7 +85,16 @@ export default function ExploreComponent(props: ExplorePageProps) {
         })
 
         return filtered
-    }, [searchTerm, selectedCategory, monetisationRange, easeOfBuildRange, competitionRange, sortField, sortDirection])
+    }, [
+        searchTerm,
+        selectedCategory,
+        monetisationRange,
+        easeOfBuildRange,
+        competitionRange,
+        sortField,
+        sortDirection
+    ])
+
 
     const handleSort = (field: SortField) => {
         if (sortField === field) {
@@ -320,17 +332,10 @@ export default function ExploreComponent(props: ExplorePageProps) {
                                                 </td>
 
                                                 <td className="p-4 flex flex-wrap gap-2">
-                                                    {idea.category.split(", ").map((cat, idx) => (
-                                                        <Badge
-                                                            key={idx}
-                                                            variant="secondary"
-                                                            className="transition-colors duration-200 hover:bg-secondary/80"
-                                                        >
-                                                            {cat}
-                                                        </Badge>
+                                                    {idea.categories.map((cat, idx) => (
+                                                        <Badge key={idx} variant="secondary">{cat}</Badge>
                                                     ))}
                                                 </td>
-
 
                                             </tr>
                                         ))}
